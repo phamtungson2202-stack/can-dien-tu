@@ -1,1 +1,194 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DỮ LIỆU CÂN ĐIỆN TỬ</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#edf4f5;--panel:#fff;--ink:#12262a;--mute:#566b70;--line:#d0e0e3;--ok:#16794a;--okbg:#dff3e8;--low:#a35a00;--lowbg:#fdecd0;--high:#b3261e;--highbg:#fbdedb;--acc:#0f6b73;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10161c;--panel:#18212a;--ink:#e8eef3;--mute:#91a0ad;--line:#2b3742;--ok:#5fd39a;--okbg:#123626;--low:#f0b45a;--lowbg:#3a2b10;--high:#ff8f87;--highbg:#42201d;--acc:#6fc3c9}}
+:root[data-theme="dark"]{--bg:#10161c;--panel:#18212a;--ink:#e8eef3;--mute:#91a0ad;--line:#2b3742;--ok:#5fd39a;--okbg:#123626;--low:#f0b45a;--lowbg:#3a2b10;--high:#ff8f87;--highbg:#42201d;--acc:#6fc3c9}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Roboto',system-ui,sans-serif;font-size:16px}
+main{max-width:640px;margin:0 auto;padding:16px}
+h1{font:700 24px 'Roboto',sans-serif;margin:4px 0 14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:12px}
+label{display:block;font-size:14px;color:var(--mute);margin-bottom:4px}
+select,input,button{font:inherit;color:var(--ink)}
+select,input{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+.suf{position:relative}
+.suf input{padding-right:44px}
+.suf span{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--mute);pointer-events:none}
+button{padding:10px 14px;border:1px solid var(--acc);background:var(--acc);color:#fff;border-radius:8px;font-weight:600;cursor:pointer}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) button{color:#0b1218}}
+button.ghost{background:transparent;color:var(--acc)}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+button:disabled{opacity:.45}
+.row{display:flex;gap:8px;align-items:flex-end}
+.row>*{flex:1}.row>button{flex:0 0 auto}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.read{text-align:center;border-radius:10px;padding:18px 8px;background:var(--bg);border:2px solid var(--line)}
+.read.ok{background:var(--okbg);border-color:var(--ok)}.read.low{background:var(--lowbg);border-color:var(--low)}.read.high{background:var(--highbg);border-color:var(--high)}
+.num{font:700 56px/1 'Roboto',sans-serif;font-variant-numeric:tabular-nums}
+.num small{font-size:24px;color:var(--mute);margin-left:6px}
+.state{font:700 20px 'Roboto',sans-serif;margin-top:8px}
+.ok .state{color:var(--ok)}.low .state{color:var(--low)}.high .state{color:var(--high)}
+.meta{color:var(--mute);font-size:14px;margin-top:2px}
+#noteBox{margin-top:10px;display:none}
+.conn{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--mute);margin-top:10px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--mute)}.dot.on{background:var(--ok)}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:15px}
+th,td{text-align:right;padding:7px 6px;border-bottom:1px solid var(--line);white-space:nowrap}
+th:nth-child(-n+6),td:nth-child(-n+6),th:nth-child(8),td:nth-child(8){text-align:left}
+th:last-child,td:last-child{text-align:left;white-space:normal;min-width:130px}
+th{color:var(--mute);font-weight:500}
+.t-ok{color:var(--ok)}.t-low{color:var(--low)}.t-high{color:var(--high)}
+.stats{display:flex;gap:16px;font-size:14px;color:var(--mute);margin-bottom:8px;flex-wrap:wrap}
+.stats b{color:var(--ink)}
+#msg{font-size:14px;color:var(--mute);margin-top:8px;min-height:18px}
+</style>
+</head>
+<body>
+<main>
+<h1>DỮ LIỆU CÂN ĐIỆN TỬ</h1>
 
+<section class="card">
+  <div class="grid2">
+    <div><label for="pName">Tên sản phẩm</label><input id="pName" type="text" placeholder="vd. FLOSAL D"></div>
+    <div><label for="pLine">Line hàng</label><input id="pLine" type="text" placeholder="vd. UY-01"></div>
+  </div>
+  <div class="grid2" style="margin-top:8px">
+    <div><label for="pLot">Số lô</label><input id="pLot" type="text" placeholder="vd. 2611M01"></div>
+    <div><label for="pMfg">NSX (ngày sản xuất)</label><input id="pMfg" type="date"></div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="grid2">
+    <div><label for="std">Khối lượng chuẩn</label>
+      <div class="suf"><input id="std" type="text" inputmode="decimal" placeholder="vd. 0,250"><span>kg</span></div></div>
+    <div><label for="tol">Sai số cho phép (± g)</label>
+      <select id="tol"><option value="10">10 g</option><option value="20">20 g</option><option value="30">30 g</option></select></div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="read" id="read">
+    <div class="num"><span id="val">--</span><small>kg</small></div>
+    <div class="state" id="state">Chưa có số liệu</div>
+    <div class="meta" id="diff">Kết nối cân, rồi bấm in trên cân để lưu</div>
+  </div>
+  <div id="noteBox">
+    <label for="note">Ghi chú (kết quả không đạt)</label>
+    <input id="note" type="text" placeholder="vd. Cân lại lần 2, bao rách...">
+  </div>
+  <div class="conn"><span class="dot" id="dot"></span><span id="connTxt">Chưa kết nối cân</span></div>
+</section>
+
+<section class="card">
+  <div>
+    <label for="baud">Tốc độ baud</label>
+    <select id="baud"><option>1200</option><option>2400</option><option selected>9600</option><option>19200</option><option>115200</option></select>
+  </div>
+  <div class="row" style="margin-top:8px">
+    <button id="conn">Kết nối cân (USB/COM)</button>
+    <button class="ghost" id="disc" disabled>Ngắt</button>
+  </div>
+  <div id="msg"></div>
+</section>
+
+<section class="card">
+  <div class="stats"><span>Tổng: <b id="sN">0</b></span><span>Đạt: <b id="sOk">0</b></span><span>Trung bình: <b id="sAvg">--</b> kg</span></div>
+  <div class="tablewrap"><table>
+    <thead><tr><th>STT</th><th>Giờ</th><th>Sản phẩm</th><th>Line</th><th>Lô</th><th>NSX</th><th>Khối lượng (kg)</th><th>KQ</th><th>Ghi chú</th></tr></thead>
+    <tbody id="log"><tr><td colspan="9" style="text-align:center;color:var(--mute)">Chưa có lần cân nào</td></tr></tbody>
+  </table></div>
+  <div class="row" style="margin-top:10px">
+    <button class="ghost" id="copy">Sao chép CSV</button>
+    <button class="ghost" id="clear">Xóa lịch sử</button>
+  </div>
+</section>
+</main>
+
+<script>
+const $=id=>document.getElementById(id);
+const FIELDS=['pName','pLine','pLot','pMfg'];
+let log=[], cur=null, port=null, reader=null, keepReading=false, lastKey='', lastAt=0, lastIdx=-1;
+
+function load(){try{
+ const l=JSON.parse(localStorage.getItem('can_log2')||'null');if(Array.isArray(l))log=l;
+ const t=localStorage.getItem('can_tol');if(['10','20','30'].includes(t))$('tol').value=t;
+ const c=localStorage.getItem('can_std2');if(c)$('std').value=c;
+ FIELDS.forEach(k=>{const v=localStorage.getItem('can_'+k);if(v)$(k).value=v;});}catch(e){}}
+function persist(){try{localStorage.setItem('can_log2',JSON.stringify(log));
+ localStorage.setItem('can_tol',$('tol').value);localStorage.setItem('can_std2',$('std').value);
+ FIELDS.forEach(k=>localStorage.setItem('can_'+k,$(k).value));}catch(e){}}
+
+function fmt3(n){return Number(n).toLocaleString('vi-VN',{minimumFractionDigits:3,maximumFractionDigits:3})}
+function getStd(){const v=parseFloat(String($('std').value||'').replace(',','.'));return isFinite(v)&&v>0?v:0}
+function judge(w){const std=getStd(),tol=(+$('tol').value||0)/1000,d=Math.round((w-std)*1000)/1000;
+ return {std,d,res:Math.abs(d)<=tol+1e-9?'ok':(d<0?'low':'high')};}
+const label={ok:'ĐẠT',low:'THIẾU',high:'DƯ'};
+function fd(s){return s?s.split('-').reverse().join('/'):''}
+function esc(s){return String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+
+function render(saved){const r=$('read');
+ if(cur==null){r.className='read';$('val').textContent='--';$('state').textContent='Chưa có số liệu';$('diff').textContent='Kết nối cân, rồi bấm in trên cân để lưu';return;}
+ if(!getStd()){r.className='read';$('val').textContent=fmt3(cur);$('state').textContent='Nhập khối lượng chuẩn';$('diff').textContent='Chưa lưu: điền ô Khối lượng chuẩn phía trên';return;}
+ const j=judge(cur);r.className='read '+j.res;$('val').textContent=fmt3(cur);$('state').textContent=label[j.res];
+ $('diff').textContent=`Chuẩn ${fmt3(j.std)} kg · lệch ${j.d>0?'+':''}${fmt3(j.d)} kg`+(saved?' · đã lưu':'');}
+function renderLog(){const tb=$('log');
+ if(!log.length)tb.innerHTML='<tr><td colspan="9" style="text-align:center;color:var(--mute)">Chưa có lần cân nào</td></tr>';
+ else tb.innerHTML=log.map((e,i)=>`<tr><td>${i+1}</td><td>${e.t}</td><td>${esc(e.name)}</td><td>${esc(e.line)}</td><td>${esc(e.lot)}</td><td>${fd(e.mfg)}</td><td>${fmt3(e.w)}</td><td class="t-${e.res}">${label[e.res]}</td><td>${esc(e.note)}</td></tr>`).reverse().join('');
+ $('sN').textContent=log.length;$('sOk').textContent=log.filter(e=>e.res==='ok').length;
+ $('sAvg').textContent=log.length?fmt3(log.reduce((a,e)=>a+e.w,0)/log.length):'--';}
+
+function onScale(kg){if(!isFinite(kg))return;cur=Math.round(kg*1000)/1000;
+ if(!getStd()){render(false);return;}
+ const key=cur+'|'+getStd(),now=Date.now();
+ if(key===lastKey&&now-lastAt<1000){render(true);return;}
+ lastKey=key;lastAt=now;
+ const j=judge(cur);
+ log.push({t:new Date().toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit',second:'2-digit'}),std:j.std,w:cur,d:j.d,res:j.res,name:$('pName').value.trim(),line:$('pLine').value.trim(),lot:$('pLot').value.trim(),mfg:$('pMfg').value,note:''});
+ if(log.length>500)log.shift();
+ lastIdx=log.length-1;
+ $('note').value='';$('noteBox').style.display=j.res==='ok'?'none':'block';
+ persist();renderLog();render(true);}
+function parseLine(line){const m=line.match(/([-+]?\s*\d+(?:[.,]\d+)?)\s*(kg|g)?/i);if(!m)return;
+ let v=parseFloat(m[1].replace(/\s/g,'').replace(',','.'));const u=(m[2]||'kg').toLowerCase();
+ if(u==='g')v/=1000;onScale(v);}
+
+async function connect(){
+ if(!('serial' in navigator)){$('msg').textContent='Trình duyệt này không hỗ trợ cổng COM/USB. Dùng Chrome hoặc Edge trên máy tính.';return;}
+ try{port=await navigator.serial.requestPort();await port.open({baudRate:+$('baud').value});}
+ catch(e){$('msg').textContent='Không kết nối được: '+(e.message||e.name)+'. Nếu mở trong khung nhúng, hãy mở trang ở tab riêng.';return;}
+ keepReading=true;$('dot').classList.add('on');$('connTxt').textContent='Đang nhận dữ liệu từ cân';$('conn').disabled=true;$('disc').disabled=false;$('msg').textContent='';
+ const dec=new TextDecoderStream();port.readable.pipeTo(dec.writable).catch(()=>{});reader=dec.readable.getReader();
+ let buf='';
+ try{while(keepReading){const {value,done}=await reader.read();if(done)break;buf+=value;
+  const parts=buf.split(/[\r\n]+/);buf=parts.pop();parts.forEach(p=>p.trim()&&parseLine(p));}}
+ catch(e){}
+ await disconnect();}
+async function disconnect(){keepReading=false;try{if(reader)await reader.cancel();}catch(e){}
+ try{if(port)await port.close();}catch(e){}
+ port=null;reader=null;$('dot').classList.remove('on');$('connTxt').textContent='Chưa kết nối cân';$('conn').disabled=false;$('disc').disabled=true;}
+
+$('conn').onclick=connect;$('disc').onclick=disconnect;
+$('std').oninput=()=>{persist();if(cur!=null)render(false);};
+$('tol').onchange=()=>{persist();if(cur!=null)render(false);};
+$('note').oninput=()=>{if(lastIdx>=0&&log[lastIdx]){log[lastIdx].note=$('note').value.trim();persist();renderLog();}};
+$('clear').onclick=()=>{log=[];lastIdx=-1;$('noteBox').style.display='none';persist();renderLog();};
+$('copy').onclick=async()=>{const q=s=>'"'+String(s||'').replace(/"/g,'""')+'"';const n=x=>Number(x).toFixed(3);
+ const csv='STT,Giờ,Sản phẩm,Line hàng,Số lô,NSX,Chuẩn (kg),Khối lượng (kg),Lệch (kg),Kết quả,Ghi chú\n'+log.map((e,i)=>[i+1,e.t,q(e.name),q(e.line),q(e.lot),fd(e.mfg),n(e.std),n(e.w),n(e.d),label[e.res],q(e.note)].join(',')).join('\n');
+ try{await navigator.clipboard.writeText(csv);$('msg').textContent='Đã sao chép CSV, dán vào Excel hoặc Google Sheets.';}
+ catch(e){$('msg').textContent='Không sao chép được. Hãy thử lại trong tab riêng.';}};
+
+FIELDS.forEach(k=>$(k).oninput=persist);
+load();renderLog();render(false);
+</script>
+</body>
+</html>
