@@ -60,11 +60,11 @@ th{color:var(--lbl);font-weight:700}
 
 <section class="card">
   <div class="grid2">
-    <div><label for="pName">Tên sản phẩm</label><input id="pName" type="text" placeholder="vd. FLOSAL D"></div>
-    <div><label for="pLine">Line hàng</label><input id="pLine" type="text" placeholder="vd. UY-01"></div>
+    <div><label for="pName">Tên sản phẩm</label><input id="pName" type="text" autocapitalize="characters" autocomplete="off" placeholder="vd. FLOSAL D"></div>
+    <div><label for="pLine">Line hàng</label><input id="pLine" type="text" autocapitalize="characters" autocomplete="off" placeholder="vd. UY-01"></div>
   </div>
   <div class="grid2" style="margin-top:8px">
-    <div><label for="pLot">Số lô</label><input id="pLot" type="text" placeholder="vd. 2611M01"></div>
+    <div><label for="pLot">Số lô</label><input id="pLot" type="text" autocapitalize="characters" autocomplete="off" placeholder="vd. 2611M01"></div>
     <div><label for="pMfg">NSX (ngày sản xuất)</label><input id="pMfg" type="date"></div>
   </div>
   <div class="grid2" style="margin-top:8px">
@@ -150,6 +150,7 @@ th{color:var(--lbl);font-weight:700}
 <script>
 const $=id=>document.getElementById(id);
 const FIELDS=['pName','pLine','pLot','pMfg','pUnit','pForm','pPer'];
+const UPPER=['pName','pLine','pLot'];
 const UNITS=['thùng','bao','hộp'], FORMS=['Bột','Nước','Tiêm'];
 let log=[], cur=null, port=null, reader=null, keepReading=false, lastKey='', lastAt=0, lastIdx=-1;
 
@@ -157,12 +158,17 @@ function subOf(form){return form==='Bột'?'túi':'chai'}
 function syncUnits(){const u=$('pUnit').value,s=subOf($('pForm').value);
  $('perLabel').textContent='Số lượng trên 1 ('+u+')';$('perSuf').textContent=s;$('leSuf').textContent=s;}
 
+// Tự động chuyển chữ in hoa (giữ nguyên vị trí con trỏ)
+function upper(el){const v=el.value.toUpperCase();if(v===el.value)return;
+ const s=el.selectionStart,e=el.selectionEnd;el.value=v;try{el.setSelectionRange(s,e)}catch(x){}}
+
 function load(){try{
  const l=JSON.parse(localStorage.getItem('can_log2')||'null');if(Array.isArray(l))log=l;
  const t=localStorage.getItem('can_tol');if(['10','20','30'].includes(t))$('tol').value=t;
  const c=localStorage.getItem('can_std2');if(c)$('std').value=c;
  FIELDS.forEach(k=>{const v=localStorage.getItem('can_'+k);if(!v)return;
-  if(k==='pUnit'&&!UNITS.includes(v))return;if(k==='pForm'&&!FORMS.includes(v))return;$(k).value=v;});}catch(e){}}
+  if(k==='pUnit'&&!UNITS.includes(v))return;if(k==='pForm'&&!FORMS.includes(v))return;$(k).value=v;});
+ UPPER.forEach(k=>upper($(k)));}catch(e){}}
 function persist(){try{localStorage.setItem('can_log2',JSON.stringify(log));
  localStorage.setItem('can_tol',$('tol').value);localStorage.setItem('can_std2',$('std').value);
  FIELDS.forEach(k=>localStorage.setItem('can_'+k,$(k).value));}catch(e){}}
@@ -204,7 +210,7 @@ function onScale(kg){if(!isFinite(kg))return;cur=Math.round(kg*1000)/1000;
  if(key===lastKey&&now-lastAt<1000){render(true);return;}
  lastKey=key;lastAt=now;
  const j=judge(cur);
- log.push({t:new Date().toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit',second:'2-digit'}),std:j.std,w:cur,d:j.d,res:j.res,name:$('pName').value.trim(),line:$('pLine').value.trim(),lot:$('pLot').value.trim(),mfg:$('pMfg').value,unit:$('pUnit').value,form:$('pForm').value,per:$('pPer').value.trim(),note:'',le:''});
+ log.push({t:new Date().toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit',second:'2-digit'}),std:j.std,w:cur,d:j.d,res:j.res,name:$('pName').value.trim().toUpperCase(),line:$('pLine').value.trim().toUpperCase(),lot:$('pLot').value.trim().toUpperCase(),mfg:$('pMfg').value,unit:$('pUnit').value,form:$('pForm').value,per:$('pPer').value.trim(),note:'',le:''});
  if(log.length>500)log.shift();
  lastIdx=log.length-1;
  $('note').value='';$('le').value='';$('noteBox').style.display=j.res==='ok'?'none':'block';
@@ -240,6 +246,10 @@ $('copy').onclick=async()=>{const q=s=>'"'+String(s||'').replace(/"/g,'""')+'"';
  catch(e){$('msg').textContent='Không sao chép được. Hãy thử lại trong tab riêng.';}};
 
 FIELDS.forEach(k=>{$(k).oninput=persist;$(k).onchange=persist;});
+// Ô Tên sản phẩm, Line hàng, Số lô: tự động in hoa (bỏ qua khi đang gõ dấu tiếng Việt để không làm hỏng bộ gõ)
+UPPER.forEach(k=>{const el=$(k);
+ el.oninput=ev=>{if(!ev.isComposing)upper(el);persist();};
+ el.addEventListener('compositionend',()=>{upper(el);persist();});});
 ['change','input'].forEach(ev=>{$('pUnit').addEventListener(ev,()=>{syncUnits();persist();renderLog();});$('pForm').addEventListener(ev,()=>{syncUnits();persist();renderLog();});});
 
 // TẠM THỜI: nhập khối lượng tay (xóa khối này cùng với section "manualCard" khi không cần nữa)
