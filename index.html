@@ -4,33 +4,30 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>DỮ LIỆU CÂN ĐIỆN TỬ</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#edf4f5;--panel:#fff;--ink:#12262a;--mute:#566b70;--line:#d0e0e3;--ok:#16794a;--okbg:#dff3e8;--low:#a35a00;--lowbg:#fdecd0;--high:#b3261e;--highbg:#fbdedb;--acc:#0f6b73;
-box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10161c;--panel:#18212a;--ink:#e8eef3;--mute:#91a0ad;--line:#2b3742;--ok:#5fd39a;--okbg:#123626;--low:#f0b45a;--lowbg:#3a2b10;--high:#ff8f87;--highbg:#42201d;--acc:#6fc3c9}}
-:root[data-theme="dark"]{--bg:#10161c;--panel:#18212a;--ink:#e8eef3;--mute:#91a0ad;--line:#2b3742;--ok:#5fd39a;--okbg:#123626;--low:#f0b45a;--lowbg:#3a2b10;--high:#ff8f87;--highbg:#42201d;--acc:#6fc3c9}
+:root{--page:#0f6b73;--panel:#fff;--ink:#12262a;--mute:#566b70;--line:#cfe0e2;--ok:#16794a;--okbg:#dff3e8;--low:#a35a00;--lowbg:#fdecd0;--high:#b3261e;--highbg:#fbdedb;--acc:#0f6b73;--lbl:#0b4f55;
+color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:'Roboto',system-ui,sans-serif;font-size:16px}
+body{margin:0;background:var(--page);color:var(--ink);font-family:'Roboto',system-ui,sans-serif;font-size:16px}
 main{max-width:640px;margin:0 auto;padding:16px}
-h1{font:700 24px 'Roboto',sans-serif;margin:4px 0 14px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:12px}
-label{display:block;font-size:14px;color:var(--mute);margin-bottom:4px}
+h1{font:900 24px 'Roboto',sans-serif;margin:4px 0 14px;color:#fff}
+.card{background:var(--panel);border-radius:10px;padding:14px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+label{display:block;font-size:15px;font-weight:700;color:var(--lbl);margin-bottom:5px;padding-left:8px;border-left:4px solid var(--acc)}
 select,input,button{font:inherit;color:var(--ink)}
-select,input{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+select,input{width:100%;padding:10px;border:1px solid #9bbcc0;border-radius:8px;background:#fff}
 .suf{position:relative}
-.suf input{padding-right:44px}
+.suf input{padding-right:58px}
 .suf span{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--mute);pointer-events:none}
 button{padding:10px 14px;border:1px solid var(--acc);background:var(--acc);color:#fff;border-radius:8px;font-weight:600;cursor:pointer}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) button{color:#0b1218}}
-button.ghost{background:transparent;color:var(--acc)}
+button.ghost{background:#fff;color:var(--acc)}
 button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
 button:disabled{opacity:.45}
 .row{display:flex;gap:8px;align-items:flex-end}
 .row>*{flex:1}.row>button{flex:0 0 auto}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.read{text-align:center;border-radius:10px;padding:18px 8px;background:var(--bg);border:2px solid var(--line)}
+.read{text-align:center;border-radius:10px;padding:18px 8px;background:#f1f7f8;border:2px solid var(--line)}
 .read.ok{background:var(--okbg);border-color:var(--ok)}.read.low{background:var(--lowbg);border-color:var(--low)}.read.high{background:var(--highbg);border-color:var(--high)}
 .num{font:700 56px/1 'Roboto',sans-serif;font-variant-numeric:tabular-nums}
 .num small{font-size:24px;color:var(--mute);margin-left:6px}
@@ -43,13 +40,18 @@ button:disabled{opacity:.45}
 .tablewrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:15px}
 th,td{text-align:right;padding:7px 6px;border-bottom:1px solid var(--line);white-space:nowrap}
-th:nth-child(-n+6),td:nth-child(-n+6),th:nth-child(8),td:nth-child(8){text-align:left}
-th:last-child,td:last-child{text-align:left;white-space:normal;min-width:130px}
-th{color:var(--mute);font-weight:500}
+th:nth-child(-n+6),td:nth-child(-n+6),th:nth-child(9),td:nth-child(9){text-align:left}
+th:last-child,td:last-child{text-align:left;white-space:normal;min-width:150px}
+th{color:var(--lbl);font-weight:700}
 .t-ok{color:var(--ok)}.t-low{color:var(--low)}.t-high{color:var(--high)}
-.stats{display:flex;gap:16px;font-size:14px;color:var(--mute);margin-bottom:8px;flex-wrap:wrap}
+.stats{display:flex;gap:8px 16px;font-size:15px;color:var(--mute);margin-bottom:8px;flex-wrap:wrap;align-items:baseline}
 .stats b{color:var(--ink)}
+.stats .right{margin-left:auto}
+#failList{display:none;margin:0 0 10px;padding:8px 10px;border-radius:8px;background:var(--highbg);font-size:14px;line-height:1.5}
+#failList .ttl{font-weight:700;color:var(--high);margin-bottom:2px}
 #msg{font-size:14px;color:var(--mute);margin-top:8px;min-height:18px}
+.tmp{border:2px dashed #e0a800}
+.tmp .tag{display:inline-block;background:#fff3cd;color:#7a5b00;font-size:12px;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:8px}
 </style>
 </head>
 <body>
@@ -64,6 +66,16 @@ th{color:var(--mute);font-weight:500}
   <div class="grid2" style="margin-top:8px">
     <div><label for="pLot">Số lô</label><input id="pLot" type="text" placeholder="vd. 2611M01"></div>
     <div><label for="pMfg">NSX (ngày sản xuất)</label><input id="pMfg" type="date"></div>
+  </div>
+  <div class="grid2" style="margin-top:8px">
+    <div><label for="pForm">Dạng bào chế</label>
+      <select id="pForm"><option value="Bột" selected>Bột</option><option value="Nước">Nước</option><option value="Tiêm">Tiêm</option></select></div>
+  </div>
+  <div class="grid2" style="margin-top:8px">
+    <div><label for="pUnit">Đơn vị tính</label>
+      <select id="pUnit"><option value="thùng" selected>Thùng</option><option value="bao">Bao</option><option value="hộp">Hộp</option></select></div>
+    <div><label for="pPer" id="perLabel">Số lượng trên 1 (thùng)</label>
+      <div class="suf"><input id="pPer" type="number" inputmode="numeric" min="0" step="any" placeholder="vd. 24"><span id="perSuf">túi</span></div></div>
   </div>
 </section>
 
@@ -85,6 +97,10 @@ th{color:var(--mute);font-weight:500}
   <div id="noteBox">
     <label for="note">Ghi chú (kết quả không đạt)</label>
     <input id="note" type="text" placeholder="vd. Cân lại lần 2, bao rách...">
+    <div style="margin-top:8px">
+      <label for="le">Số lượng lẻ</label>
+      <div class="suf"><input id="le" type="number" inputmode="numeric" min="0" step="any" placeholder="vd. 7"><span id="leSuf">túi</span></div>
+    </div>
   </div>
   <div class="conn"><span class="dot" id="dot"></span><span id="connTxt">Chưa kết nối cân</span></div>
 </section>
@@ -101,11 +117,28 @@ th{color:var(--mute);font-weight:500}
   <div id="msg"></div>
 </section>
 
+<!-- TẠM THỜI: nhập khối lượng tay để xem thử. Muốn bỏ thì xóa cả khối section này -->
+<section class="card tmp" id="manualCard">
+  <span class="tag">TẠM THỜI - để xem thử kết quả</span>
+  <label for="manual">Nhập khối lượng tay</label>
+  <div class="row">
+    <div class="suf"><input id="manual" type="text" inputmode="decimal" placeholder="vd. 0,255"><span>kg</span></div>
+    <button id="useManual">Lưu số này</button>
+  </div>
+</section>
+<!-- HẾT PHẦN TẠM THỜI -->
+
 <section class="card">
-  <div class="stats"><span>Tổng: <b id="sN">0</b></span><span>Đạt: <b id="sOk">0</b></span><span>Trung bình: <b id="sAvg">--</b> kg</span></div>
+  <div class="stats">
+    <span>Tổng: <b id="sN">0</b></span>
+    <span>Đạt: <b id="sOk">0</b></span>
+    <span>Không đạt: <b id="sBad">0</b></span>
+    <span class="right">Tổng số lượng: <b id="sQty">0</b></span>
+  </div>
+  <div id="failList"></div>
   <div class="tablewrap"><table>
-    <thead><tr><th>STT</th><th>Giờ</th><th>Sản phẩm</th><th>Line</th><th>Lô</th><th>NSX</th><th>Khối lượng (kg)</th><th>KQ</th><th>Ghi chú</th></tr></thead>
-    <tbody id="log"><tr><td colspan="9" style="text-align:center;color:var(--mute)">Chưa có lần cân nào</td></tr></tbody>
+    <thead><tr><th>STT</th><th>Giờ</th><th>Sản phẩm</th><th>Line</th><th>Lô</th><th>NSX</th><th>Số lượng</th><th>Khối lượng (Kg)</th><th>KQ</th><th>Ghi chú</th></tr></thead>
+    <tbody id="log"><tr><td colspan="10" style="text-align:center;color:var(--mute)">Chưa có lần cân nào</td></tr></tbody>
   </table></div>
   <div class="row" style="margin-top:10px">
     <button class="ghost" id="copy">Sao chép CSV</button>
@@ -116,14 +149,20 @@ th{color:var(--mute);font-weight:500}
 
 <script>
 const $=id=>document.getElementById(id);
-const FIELDS=['pName','pLine','pLot','pMfg'];
+const FIELDS=['pName','pLine','pLot','pMfg','pUnit','pForm','pPer'];
+const UNITS=['thùng','bao','hộp'], FORMS=['Bột','Nước','Tiêm'];
 let log=[], cur=null, port=null, reader=null, keepReading=false, lastKey='', lastAt=0, lastIdx=-1;
+
+function subOf(form){return form==='Bột'?'túi':'chai'}
+function syncUnits(){const u=$('pUnit').value,s=subOf($('pForm').value);
+ $('perLabel').textContent='Số lượng trên 1 ('+u+')';$('perSuf').textContent=s;$('leSuf').textContent=s;}
 
 function load(){try{
  const l=JSON.parse(localStorage.getItem('can_log2')||'null');if(Array.isArray(l))log=l;
  const t=localStorage.getItem('can_tol');if(['10','20','30'].includes(t))$('tol').value=t;
  const c=localStorage.getItem('can_std2');if(c)$('std').value=c;
- FIELDS.forEach(k=>{const v=localStorage.getItem('can_'+k);if(v)$(k).value=v;});}catch(e){}}
+ FIELDS.forEach(k=>{const v=localStorage.getItem('can_'+k);if(!v)return;
+  if(k==='pUnit'&&!UNITS.includes(v))return;if(k==='pForm'&&!FORMS.includes(v))return;$(k).value=v;});}catch(e){}}
 function persist(){try{localStorage.setItem('can_log2',JSON.stringify(log));
  localStorage.setItem('can_tol',$('tol').value);localStorage.setItem('can_std2',$('std').value);
  FIELDS.forEach(k=>localStorage.setItem('can_'+k,$(k).value));}catch(e){}}
@@ -134,6 +173,10 @@ function judge(w){const std=getStd(),tol=(+$('tol').value||0)/1000,d=Math.round(
  return {std,d,res:Math.abs(d)<=tol+1e-9?'ok':(d<0?'low':'high')};}
 const label={ok:'ĐẠT',low:'THIẾU',high:'DƯ'};
 function fd(s){return s?s.split('-').reverse().join('/'):''}
+// Số lượng của 1 dòng: thùng ĐẠT lấy theo "Số lượng trên 1 (...)", thùng KHÔNG ĐẠT lấy theo "Số lượng lẻ" trong ghi chú
+function qtyOf(e){return e.res==='ok'?(+e.per||0):(+e.le||0)}
+function qtyText(e){const v=e.res==='ok'?e.per:e.le;if(v===''||v==null)return '';return Number(v).toLocaleString('vi-VN')+' '+subOf(e.form)}
+function noteText(e){const p=[];if(e.note)p.push(e.note);if(e.le)p.push('Lẻ: '+e.le+' '+subOf(e.form));return p.join(' · ')}
 function esc(s){return String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 
 function render(saved){const r=$('read');
@@ -141,11 +184,19 @@ function render(saved){const r=$('read');
  if(!getStd()){r.className='read';$('val').textContent=fmt3(cur);$('state').textContent='Nhập khối lượng chuẩn';$('diff').textContent='Chưa lưu: điền ô Khối lượng chuẩn phía trên';return;}
  const j=judge(cur);r.className='read '+j.res;$('val').textContent=fmt3(cur);$('state').textContent=label[j.res];
  $('diff').textContent=`Chuẩn ${fmt3(j.std)} kg · lệch ${j.d>0?'+':''}${fmt3(j.d)} kg`+(saved?' · đã lưu':'');}
+
 function renderLog(){const tb=$('log');
- if(!log.length)tb.innerHTML='<tr><td colspan="9" style="text-align:center;color:var(--mute)">Chưa có lần cân nào</td></tr>';
- else tb.innerHTML=log.map((e,i)=>`<tr><td>${i+1}</td><td>${e.t}</td><td>${esc(e.name)}</td><td>${esc(e.line)}</td><td>${esc(e.lot)}</td><td>${fd(e.mfg)}</td><td>${fmt3(e.w)}</td><td class="t-${e.res}">${label[e.res]}</td><td>${esc(e.note)}</td></tr>`).reverse().join('');
- $('sN').textContent=log.length;$('sOk').textContent=log.filter(e=>e.res==='ok').length;
- $('sAvg').textContent=log.length?fmt3(log.reduce((a,e)=>a+e.w,0)/log.length):'--';}
+ if(!log.length)tb.innerHTML='<tr><td colspan="10" style="text-align:center;color:var(--mute)">Chưa có lần cân nào</td></tr>';
+ else tb.innerHTML=log.map((e,i)=>`<tr><td>${i+1}</td><td>${e.t}</td><td>${esc(e.name)}</td><td>${esc(e.line)}</td><td>${esc(e.lot)}</td><td>${fd(e.mfg)}</td><td>${esc(qtyText(e))}</td><td>${fmt3(e.w)}</td><td class="t-${e.res}">${label[e.res]}</td><td>${esc(noteText(e))}</td></tr>`).reverse().join('');
+ const u=$('pUnit').value,sub=subOf($('pForm').value);
+ const n=log.length,ok=log.filter(e=>e.res==='ok').length,bad=n-ok;
+ let tot=0;log.forEach(e=>{tot+=qtyOf(e);});
+ $('sN').textContent=n+' '+u;$('sOk').textContent=ok+' '+u;$('sBad').textContent=bad+' '+u;
+ $('sQty').textContent=tot.toLocaleString('vi-VN')+' '+sub;
+ const fl=$('failList'),bl=log.map((e,i)=>({e,i})).filter(x=>x.e.res!=='ok');
+ if(!bl.length){fl.style.display='none';fl.innerHTML='';}
+ else{fl.style.display='block';
+  fl.innerHTML='<div class="ttl">Chi tiết '+u+' không đạt</div>'+bl.map(x=>`<div><b>STT ${x.i+1}</b> · <span class="t-${x.e.res}">${label[x.e.res]}</span> · ${x.e.note?esc(x.e.note):'<i>chưa có ghi chú</i>'}${x.e.le?` · Số lượng lẻ: <b>${esc(x.e.le)} ${subOf(x.e.form)}</b>`:''}</div>`).join('');}}
 
 function onScale(kg){if(!isFinite(kg))return;cur=Math.round(kg*1000)/1000;
  if(!getStd()){render(false);return;}
@@ -153,10 +204,10 @@ function onScale(kg){if(!isFinite(kg))return;cur=Math.round(kg*1000)/1000;
  if(key===lastKey&&now-lastAt<1000){render(true);return;}
  lastKey=key;lastAt=now;
  const j=judge(cur);
- log.push({t:new Date().toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit',second:'2-digit'}),std:j.std,w:cur,d:j.d,res:j.res,name:$('pName').value.trim(),line:$('pLine').value.trim(),lot:$('pLot').value.trim(),mfg:$('pMfg').value,note:''});
+ log.push({t:new Date().toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit',second:'2-digit'}),std:j.std,w:cur,d:j.d,res:j.res,name:$('pName').value.trim(),line:$('pLine').value.trim(),lot:$('pLot').value.trim(),mfg:$('pMfg').value,unit:$('pUnit').value,form:$('pForm').value,per:$('pPer').value.trim(),note:'',le:''});
  if(log.length>500)log.shift();
  lastIdx=log.length-1;
- $('note').value='';$('noteBox').style.display=j.res==='ok'?'none':'block';
+ $('note').value='';$('le').value='';$('noteBox').style.display=j.res==='ok'?'none':'block';
  persist();renderLog();render(true);}
 function parseLine(line){const m=line.match(/([-+]?\s*\d+(?:[.,]\d+)?)\s*(kg|g)?/i);if(!m)return;
  let v=parseFloat(m[1].replace(/\s/g,'').replace(',','.'));const u=(m[2]||'kg').toLowerCase();
@@ -180,15 +231,22 @@ async function disconnect(){keepReading=false;try{if(reader)await reader.cancel(
 $('conn').onclick=connect;$('disc').onclick=disconnect;
 $('std').oninput=()=>{persist();if(cur!=null)render(false);};
 $('tol').onchange=()=>{persist();if(cur!=null)render(false);};
-$('note').oninput=()=>{if(lastIdx>=0&&log[lastIdx]){log[lastIdx].note=$('note').value.trim();persist();renderLog();}};
+function updNote(){if(lastIdx>=0&&log[lastIdx]){log[lastIdx].note=$('note').value.trim();log[lastIdx].le=$('le').value.trim();persist();renderLog();}}
+$('note').oninput=updNote;$('le').oninput=updNote;
 $('clear').onclick=()=>{log=[];lastIdx=-1;$('noteBox').style.display='none';persist();renderLog();};
 $('copy').onclick=async()=>{const q=s=>'"'+String(s||'').replace(/"/g,'""')+'"';const n=x=>Number(x).toFixed(3);
- const csv='STT,Giờ,Sản phẩm,Line hàng,Số lô,NSX,Chuẩn (kg),Khối lượng (kg),Lệch (kg),Kết quả,Ghi chú\n'+log.map((e,i)=>[i+1,e.t,q(e.name),q(e.line),q(e.lot),fd(e.mfg),n(e.std),n(e.w),n(e.d),label[e.res],q(e.note)].join(',')).join('\n');
+ const csv='STT,Giờ,Sản phẩm,Line hàng,Số lô,NSX,Số lượng,Khối lượng (Kg),Kết quả,Ghi chú\n'+log.map((e,i)=>[i+1,e.t,q(e.name),q(e.line),q(e.lot),fd(e.mfg),q(qtyText(e)),n(e.w),label[e.res],q(noteText(e))].join(',')).join('\n');
  try{await navigator.clipboard.writeText(csv);$('msg').textContent='Đã sao chép CSV, dán vào Excel hoặc Google Sheets.';}
  catch(e){$('msg').textContent='Không sao chép được. Hãy thử lại trong tab riêng.';}};
 
-FIELDS.forEach(k=>$(k).oninput=persist);
-load();renderLog();render(false);
+FIELDS.forEach(k=>{$(k).oninput=persist;$(k).onchange=persist;});
+['change','input'].forEach(ev=>{$('pUnit').addEventListener(ev,()=>{syncUnits();persist();renderLog();});$('pForm').addEventListener(ev,()=>{syncUnits();persist();renderLog();});});
+
+// TẠM THỜI: nhập khối lượng tay (xóa khối này cùng với section "manualCard" khi không cần nữa)
+$('useManual').onclick=()=>{const v=parseFloat(String($('manual').value||'').replace(',','.'));if(!isFinite(v)||v<=0)return;lastKey='';onScale(v);};
+// HẾT PHẦN TẠM THỜI
+
+load();syncUnits();renderLog();render(false);
 </script>
 </body>
 </html>
